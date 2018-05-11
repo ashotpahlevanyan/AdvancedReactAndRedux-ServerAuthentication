@@ -1,9 +1,5 @@
-module.exports = function (app) {
-	app.get('/', function(req, res, next){
-		res.send(['waterbottle', 'phone', 'paper']);
-	});
+const Authentication = require('./controllers/authentication');
 
-	// req is for request, it a bunch of data about the request made
-	// res is a data that we respond to request
-	// next is mostly for error handling
+module.exports = function(app) {
+	app.post('/signup', Authentication.signup);
 };
