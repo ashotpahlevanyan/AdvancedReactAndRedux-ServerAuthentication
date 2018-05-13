@@ -8,11 +8,19 @@ function tokenForUser(user) {
 	// sub is for subject : who is the subject for this token
 }
 
+exports.signin = function(req, res, next) {
+	// user has already their email and password auth'd
+	// We just need to give them a token
+	// luckily passport's done method assigns the returned user to req.user so we can get that here
+
+	res.send({ token : tokenForUser(req.user) });
+};
+
 exports.signup = function(req, res, next) {
 	const email = req.body.email;
 	const password = req.body.password;
 
-	if(!email || !password) {
+	if (!email || !password) {
 		return res.status(422).send({ error: 'You must provide an email and password' });
 	}
 	// See if a user with a given email exists
